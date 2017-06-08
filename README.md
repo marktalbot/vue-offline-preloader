@@ -6,20 +6,22 @@
 
 #### Step 1
 In your project's public root, create a symbolic link to `worker.js` found in the package `src` folder:
-~~~~
-ln -s /node_modules/@ep/preloader/src/worker.js worker.js
-~~~~
+
+```bash
+ln -s /node_modules/vue-service-worker-preloader/src/worker.js worker.js
+```
 
 
 #### Step 2
 Initialize the preloader:
-~~~~
+
+```javascript
 new Preloader({
     namespace : 'ep',
     version   : 'v1',
     assets    : ['/', 'css/main.css', 'videos/myVideo.mp4'],
 }); 
-~~~~
+```
 
 ## Options
 
@@ -44,19 +46,20 @@ new Preloader({
 @TODO rename: serviceWorker.preloading.asset ===> serviceWorker.preloading.asset
 
 ## Event basic example
-~~~~
+
+```javascript
 // main.js
 document.addEventListener('asset.loaded', () => {
     console.log('asset loaded!');
 });
-~~~~
+```
 
 #### Tests
 
-```
+```bash
 npm test
 ```
 
-```
+```bash
 npm test -- --verbose
 ```
