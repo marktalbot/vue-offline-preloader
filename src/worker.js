@@ -3,18 +3,18 @@ const ACTIONS = {
     PRELOAD              : 'PRELOAD',
     PRELOADING_COMPLETED : 'PRELOADING_COMPLETED',
     RESOURCE_PRELOADED   : 'RESOURCE_PRELOADED',
-}
+};
 
 const CACHE = {
     namespace : undefined,
     version   : undefined,
     get name() {
         return `${this.namespace}-${this.version}`;
-    }
+    },
 };
 
 let messageChannelPort;
-let debug = false;
+// let debug = false;
 
 self.addEventListener('install', (event) => {
     // Perform install stuff (open caches, etc)
@@ -24,12 +24,12 @@ self.addEventListener('install', (event) => {
             //     console.log('Opened cache:', cacheName);
             //     return cache.addAll(assets);
             // })
-        })
+        }),
     );
 });
 
 self.addEventListener('activate', (event) => {
-    //@TODO: Build this out more
+    // @TODO: Build this out more
 });
 
 self.addEventListener('message', (event) => {
@@ -37,16 +37,16 @@ self.addEventListener('message', (event) => {
 });
 
 // @TODO: Temp code from Google docs.... switch out
-self.addEventListener('fetch', function(event) {
+self.addEventListener('fetch', function (event) {
     event.respondWith(
         caches.match(event.request)
-            .then(function(response) {
+            .then(function (response) {
                 if (response) {
                     return response;
                 }
                 return fetch(event.request);
-            }
-        )
+            },
+        ),
     );
 });
 
@@ -66,9 +66,8 @@ function handleMessage(action) {
 }
 
 function initialize(data) {
-    CACHE.namespace    = data.namespace;
-    CACHE.version      = data.version;
-    debug              = data.debug;
+    CACHE.namespace = data.namespace;
+    CACHE.version = data.version;
     messageChannelPort = data.messageChannelPort;
 }
 
@@ -77,9 +76,7 @@ function preload(cache, asset) {
     return cache.add(asset).then(() => {
         messageChannelPort.postMessage({
             type    : ACTIONS.RESOURCE_PRELOADED,
-            payload : {
-                asset : asset
-            },
+            payload : { asset },
         });
     });
 }
@@ -94,6 +91,6 @@ function preloadAll(cacheName, data) {
                 type    : ACTIONS.PRELOADING_COMPLETED,
                 payload : {},
             });
-        }
+        },
     );
 }

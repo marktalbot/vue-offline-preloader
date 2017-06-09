@@ -9,9 +9,9 @@
     "lint": "@TODO"
   },
   "repository": {
-      "type": "git",
-      "url": "@TODO"
-    },
+    "type": "git",
+    "url": "@TODO"
+  },
   "ava": {
     "files": [
       "tests/*.js"
@@ -37,6 +37,9 @@
     "babel-register": "^6.24.1",
     "browser-env": "^2.0.31",
     "css-loader": "^0.28.4",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.3.0",
     "http-server": "^0.10.0",
     "vue": "^2.3.3",
     "vue-loader": "^12.2.1",
