@@ -1,24 +1,3 @@
-// Initial lifecycle
-// --------------------
-// 1. download
-// 2. install
-// 3. activate
-
-// basic worker events
-// --------------------
-// install
-// message
-// sync
-// activate
-// install
-// fetch
-
-// Temp stuff
-// let namespace = 'mt';
-// let version   = 'v1';
-// let cacheName = `${namespace}-${version}`;
-// let assets    = ['foo.png'];
-
 const ACTIONS = {
     INITIALIZE           : 'INITIALIZE',
     PRELOAD              : 'PRELOAD',
@@ -33,6 +12,7 @@ const CACHE = {
         return `${this.namespace}-${this.version}`;
     }
 };
+
 let messageChannelPort;
 let debug = false;
 
@@ -40,7 +20,6 @@ self.addEventListener('install', (event) => {
     // Perform install stuff (open caches, etc)
     event.waitUntil(
         self.skipWaiting().then(() => {
-            console.log('EVENT: install', Date.now());
             // caches.open(cacheName).then((cache) => {
             //     console.log('Opened cache:', cacheName);
             //     return cache.addAll(assets);
@@ -62,7 +41,6 @@ self.addEventListener('fetch', function(event) {
     event.respondWith(
         caches.match(event.request)
             .then(function(response) {
-                console.log('fetching...........................');
                 if (response) {
                     return response;
                 }
@@ -99,7 +77,9 @@ function preload(cache, asset) {
     return cache.add(asset).then(() => {
         messageChannelPort.postMessage({
             type    : ACTIONS.RESOURCE_PRELOADED,
-            payload : {},
+            payload : {
+                asset : asset
+            },
         });
     });
 }

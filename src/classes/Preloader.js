@@ -69,7 +69,7 @@ export default class Preloader {
     }
 
     initalizeServiceWorker() {
-        this.debug && this.debug && console.log('🔧 Initalized service worker');
+        this.debug && console.log('🔧 Initalized service worker');
         navigator.serviceWorker.controller.postMessage({
             type    : ACTIONS.INITIALIZE,
             payload : {
@@ -82,7 +82,7 @@ export default class Preloader {
     }
 
     preloadAssets() {
-        this.debug && this.debug && console.log('🔧 Preloading assets...');
+        this.debug && console.log('📦 Preloading assets...');
         navigator.serviceWorker.controller.postMessage({
             type    : ACTIONS.PRELOAD,
             payload : this.assets,
@@ -90,14 +90,16 @@ export default class Preloader {
     }
 
     // @TODO Better name for this method?
-    handleMessageFromServiceWorker() {
+    handleMessageFromServiceWorker(event) {
         switch (event.data.type) {
             case ACTIONS.RESOURCE_PRELOADED:
+                this.debug && console.log('📦 Preloaded asset:', event.data.payload.asset);
                 this.emit('serviceWorker.preloading.asset', {
                     detail: { percentageLoaded : this.percentageLoaded }
                 });
                 break;
             case ACTIONS.PRELOADING_COMPLETED:
+                this.debug && console.log('✅ Preloading complete');
                 this.emit('serviceWorker.preloading.complete');
                 break;
             default:
