@@ -2,39 +2,67 @@
 
 # Preloader
 
-## Basic Example
+### Basic Example
 
-#### Step 1
-In your project's public root, create a symbolic link to `worker.js` found in the package `src` folder:
+##### Step 1: Installation
+
+```
+$ npm install vue-offline-preloader
+```
+
+##### Step 2: Install Service Worker
+
+In your project's public public root, create a symbolic link to `worker.js` found in the package `src` folder:
 
 ```bash
-ln -s /node_modules/vue-service-worker-preloader/src/worker.js worker.js
+ln -s ./node_modules/vue-service-worker-preloader/src/worker.js worker.js
 ```
 
 
-#### Step 2
-Initialize the preloader:
+##### Step 3: Register the Component
+Register the component:
 
 ```javascript
-new Preloader({
-    namespace : 'ep',
-    version   : 'v1',
-    assets    : ['/', 'css/main.css', 'videos/myVideo.mp4'],
-}); 
+
+import VueOfflinePreloader from 'vue-offline-preloader';
+
+new Vue({
+    el: '#app',
+    components: {
+        'VueOfflinePreloader': VueOfflinePreloader
+    }
+});
 ```
 
-## Options
+##### Step 4: Add Component to Template
 
-| Option        | Type    | Default  | Description      |
-| ------------- |---------| ---------|------------------|
-| namespace     | string  | none          | Namespace for resource cache |
-| version       | string  | none          | Version of resource cache |
-| assets        | array   | none          | Collection of asset names to be cached |
-| debug         | boolean | false         | Flag to display console.log debugging messages from Service Worker |
-| scope         | string  | '/'           | Scope of the Sevice Worker's control |
-| worker        | string  | 'worker.js'   | Location of the Service Worker file. Defaults to app's public root |
+Add component to your template:
 
-## Events
+```html
+<vue-offline-preloader 
+    v-bind:assets="[
+        '/',
+        'images/logo.svg',
+        'images/profile.png'
+    ]"
+></vue-offline-preloader>
+```
+
+
+### Props
+
+| Prop             | Type    | Default      | Description  |
+| ---------------- |---------| -------------|--------------|
+| assets           | array   | none         | Collection of asset names to be cached |
+| namespace        | string  | 'vue'        | Namespace for resource cache |
+| version          | string  | 'v1'         | Version of resource cache |
+| scope            | string  | '/'          | Scope of the Sevice Worker's control |
+| worker           | string  | '/worker.js' | Location of the Service Worker file. Defaults to app's public root |
+| showPreloaderBar | boolean | true         | Display progress bar |
+| backgroundColor  | string  | '#29d'       | Background colour of progress bar |
+| debug            | boolean | false        | Flag to display console.log debugging messages from Service Worker |
+
+### Events
 
 | Event                                        | Description  |
 | -------------------------------------------- |--------------|
@@ -45,11 +73,11 @@ new Preloader({
 
 @TODO rename: serviceWorker.preloading.asset ===> serviceWorker.preloading.asset
 
-## Event basic example
+### Event basic example
 
 ```javascript
 // main.js
-document.addEventListener('asset.loaded', () => {
+document.addEventListener('serviceWorker.preloading.asset', () => {
     console.log('asset loaded!');
 });
 ```

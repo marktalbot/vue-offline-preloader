@@ -1,12 +1,17 @@
 {
-  "name": "vue-component-template",
-  "version": "1.0.0",
-  "description": "",
+  "name": "vue-offline-preloader",
+  "version": "0.0.1",
+  "description": "@TODO",
   "main": "dist/index.js",
   "scripts": {
     "test": "ava",
-    "build": "rm -rf dist && NODE_ENV=production webpack"
+    "build": "rm -rf dist && NODE_ENV=production webpack",
+    "lint": "@TODO"
   },
+  "repository": {
+      "type": "git",
+      "url": "@TODO"
+    },
   "ava": {
     "files": [
       "tests/*.js"
@@ -16,8 +21,15 @@
       "./tests/helpers/setup.js"
     ]
   },
-  "author": "",
-  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/spatie/vue-table-component/issues"
+  },
+  "homepage": "@TODO",
+  "peerDependencies": {
+    "vue": "^2.3.3"
+  },
+  "author": "Mark Talbot <markjtalbot@gmail.com> (https://marktalbot.ca)",
+  "license": "MIT",
   "devDependencies": {
     "ava": "^0.19.1",
     "babel-loader": "^7.0.0",
