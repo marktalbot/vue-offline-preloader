@@ -1,4 +1,4 @@
-# Vue.JS Service Worker Preloader
+# Vue Offline Preloader
 
 # Preloader
 
