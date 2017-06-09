@@ -2,7 +2,7 @@
 
 @TODO: write a blurb about the package
 
-### Basic Example
+### Installation and Usage
 
 ##### Step 1: Installation
 
@@ -29,7 +29,7 @@ import VueOfflinePreloader from 'vue-offline-preloader';
 new Vue({
     el: '#app',
     components: {
-        'VueOfflinePreloader': VueOfflinePreloader
+        'vue-offline-preloader': VueOfflinePreloader
     }
 });
 ```
@@ -48,19 +48,20 @@ Add component to the top of your template:
 ></vue-offline-preloader>
 ```
 
+---
 
 ### Props
 
-| Prop             | Type    | Default      | Required | Description  |
-| ---------------- |---------| -------------|----------|--------------|
-| assets           | array   |              | Yes      | Collection of asset names to be cached |
-| namespace        | string  | "vue"        | No       | Namespace for resource cache |
-| version          | string  | "v1"         | No       | Version of resource cache |
-| scope            | string  | "/"          | No       | Scope of the Sevice Worker's control |
-| worker           | string  | "/worker.js" | No       | Location of the Service Worker file. Defaults to app's public root |
-| showPreloaderBar | boolean | true         | No       | Display progress bar |
-| backgroundColor  | string  | "#29d"       | No       | Background colour of progress bar |
-| debug            | boolean | false        | No       | Flag to display console.log debugging messages from Service Worker |
+| Prop             | Type                  | Default      | Required | Description  |
+| ---------------- |-----------------------| -------------|----------|--------------|
+| assets           | Array&lt;string&gt;   |              | required | Collection of asset files to be cached |
+| namespace        | string                | "vue"        | optional | Namespace for resource cache |
+| version          | string                | "v1"         | optional | Version of resource cache |
+| scope            | string                | "/"          | optional | Scope of the Sevice Worker's control |
+| worker           | string                | "/worker.js" | optional | Location of the Service Worker file. Defaults to app's public root |
+| showPreloaderBar | boolean               | true         | optional | Display progress bar |
+| backgroundColor  | string                | "#29d"       | optional | Background colour of progress bar |
+| debug            | boolean               | false        | optional | Flag to display console.log debugging messages from Service Worker |
 
 ### Events
 

@@ -69,7 +69,7 @@
             document.addEventListener('serviceWorker.preloading.asset', (event) => {
                 this.percentLoaded = event.detail.percentageLoaded;
             });
-            document.addEventListener('serviceWorker.preloading.complete', () => {
+            document.addEventListener('serviceWorker.preloading.complete', (event) => {
                 this.loadingComplete = true;
             });
         }
@@ -88,7 +88,6 @@
     }
 
     .preloader-progress-bar .bar {
-        /*background: #29d;*/
         position: fixed;
         z-index: 1031;
         top: 0;

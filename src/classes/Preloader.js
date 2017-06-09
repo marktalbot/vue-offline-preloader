@@ -15,7 +15,6 @@ export default class Preloader {
         this.worker = worker;
         this.debug = debug;
         this.numberOfAssetsLoaded = 0;
-        
         this.messageChannel;
         this.bootstrap();
     }
@@ -25,6 +24,7 @@ export default class Preloader {
             this.debug && console.warn('Service Workers are not supported in this browser.');
             return;
         }
+
         this.registerServiceWorker()
             .then(this.initalizeMessaging.bind(this))
             .then(this.initalizeServiceWorker.bind(this))
@@ -42,7 +42,6 @@ export default class Preloader {
     }
 
     emit(event, data = null) {
-        // document.dispatchEvent(new Event(event));
         document.dispatchEvent(new CustomEvent(event, data));
     }
 
@@ -70,6 +69,8 @@ export default class Preloader {
 
     initalizeServiceWorker() {
         this.debug && console.log('🔧 Initalized service worker');
+        //@TODO: serviceWorker.controller is null. This causes an error on first load
+        console.log('////////BUG/////|||', navigator, navigator.serviceWorker);
         navigator.serviceWorker.controller.postMessage({
             type    : ACTIONS.INITIALIZE,
             payload : {
@@ -82,7 +83,7 @@ export default class Preloader {
     }
 
     preloadAssets() {
-        this.debug && console.log('📦 Preloading assets...');
+        this.debug && console.log('🚚 Preloading assets...');
         navigator.serviceWorker.controller.postMessage({
             type    : ACTIONS.PRELOAD,
             payload : this.assets,
@@ -93,7 +94,7 @@ export default class Preloader {
     handleMessageFromServiceWorker(event) {
         switch (event.data.type) {
             case ACTIONS.RESOURCE_PRELOADED:
-                this.debug && console.log('📦 Preloaded asset:', event.data.payload.asset);
+                this.debug && console.log('📦', event.data.payload.asset);
                 this.emit('serviceWorker.preloading.asset', {
                     detail: { percentageLoaded : this.percentageLoaded }
                 });
@@ -103,7 +104,7 @@ export default class Preloader {
                 this.emit('serviceWorker.preloading.complete');
                 break;
             default:
-                break;
+            break;
         }
     }
 }

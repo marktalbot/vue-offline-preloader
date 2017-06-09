@@ -17,9 +17,9 @@ let messageChannelPort;
 // let debug = false;
 
 self.addEventListener('install', (event) => {
-    // Perform install stuff (open caches, etc)
     event.waitUntil(
         self.skipWaiting().then(() => {
+            // Perform install stuff (open caches, etc)
             // caches.open(cacheName).then((cache) => {
             //     console.log('Opened cache:', cacheName);
             //     return cache.addAll(assets);
@@ -50,8 +50,6 @@ self.addEventListener('fetch', function (event) {
     );
 });
 
-// @TODO: Clear out old chaches with same namespace
-
 function handleMessage(action) {
     switch (action.type) {
         case 'INITIALIZE':
@@ -71,8 +69,8 @@ function initialize(data) {
     messageChannelPort = data.messageChannelPort;
 }
 
+// @TODO need to build this out more
 function preload(cache, asset) {
-    // @TODO need to build this out more
     return cache.add(asset).then(() => {
         messageChannelPort.postMessage({
             type    : ACTIONS.RESOURCE_PRELOADED,
@@ -86,7 +84,6 @@ function preloadAll(cacheName, data) {
         .open(cacheName)
         .then((cache) => Promise.all(data.map((asset) => preload(cache, asset))))
         .then(() => {
-            // @TODO Extract actions into own file and import into Preloader.js and worker.js (Will this break the worker if it's being sym linked?)
             messageChannelPort.postMessage({
                 type    : ACTIONS.PRELOADING_COMPLETED,
                 payload : {},
