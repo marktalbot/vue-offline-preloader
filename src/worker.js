@@ -37,10 +37,10 @@ self.addEventListener('message', (event) => {
 });
 
 // @TODO: Temp code from Google docs.... switch out
-self.addEventListener('fetch', function (event) {
+self.addEventListener('fetch', (event) => {
     event.respondWith(
         caches.match(event.request)
-            .then(function (response) {
+            .then((response) => {
                 if (response) {
                     return response;
                 }
@@ -67,6 +67,16 @@ function initialize(data) {
     CACHE.namespace = data.namespace;
     CACHE.version = data.version;
     messageChannelPort = data.messageChannelPort;
+    debug = data.debug;
+
+    return Promise.resolve()
+        // cleaning old cache keys
+        .then(() => caches.keys())
+        .then((keys) => Promise.all(keys.map(removeCache)))
+        .then((keys) => {
+            debug && console.log('Offline Service Worker', 'Cache cleaned', keys.filter(key => key), Date.now());
+        },
+    );
 }
 
 // @TODO need to build this out more
@@ -77,6 +87,18 @@ function preload(cache, asset) {
             payload : { asset },
         });
     });
+}
+
+function removeCache(key) {
+    return new Promise((resolve) => {
+            const regex = new RegExp(`${CACHE.namespace}-`);
+            if (regex.test(key) && key != CACHE.name) {
+                caches.delete(key);
+                resolve(key);
+            }
+            resolve();
+        },
+    );
 }
 
 function preloadAll(cacheName, data) {

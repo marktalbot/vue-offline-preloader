@@ -70,6 +70,7 @@ export default class Preloader {
     initalizeServiceWorker() {
         this.debug && console.log('🔧 Initalized service worker');
         //@TODO: serviceWorker.controller is null. This causes an error on first load
+        // @TODO: I think this is fixed now.
         console.log('////////BUG/////|||', navigator, navigator.serviceWorker);
         navigator.serviceWorker.controller.postMessage({
             type    : ACTIONS.INITIALIZE,
