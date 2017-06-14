@@ -1,6 +1,6 @@
 # Vue Offline Preloader
 
-This is a Vue component that uses Service Workers to enable offline experiences and preloading of assets for better performance. 
+This is a Vue component that uses Service Workers to enable offline experiences and preloading/caching of assets for improved performance. 
 
 ## Installation and Usage (macOS/Unix-like)
 
@@ -102,4 +102,4 @@ For an current list of browsers please see: [Can I Use](http://caniuse.com/#feat
 
 ## Notes
 
-- This package will work though localhost, however once deployed you will need to have HTTPS as it is a requirement for Service Workers.
+- This package will work through `localhost`, however once deployed you will need to have HTTPS as it is a requirement for Service Workers.

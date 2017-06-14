@@ -2,8 +2,8 @@ const ACTIONS = {
     INITIALIZE           : 'INITIALIZE',
     PRELOAD              : 'PRELOAD',
     PRELOADING_COMPLETED : 'PRELOADING_COMPLETED',
-    RESOURCE_PRELOADED   : 'RESOURCE_PRELOADED', // @TODO: maybe rename this
-}
+    RESOURCE_PRELOADED   : 'RESOURCE_PRELOADED',
+};
 
 export default class Preloader {
 
@@ -29,7 +29,7 @@ export default class Preloader {
             .then(this.initalizeMessaging.bind(this))
             .then(this.initalizeServiceWorker.bind(this))
             .then(this.preloadAssets.bind(this)
-        )
+        );
     }
 
     get totalNumberOfAssets() {
@@ -63,22 +63,18 @@ export default class Preloader {
     initalizeMessaging() {
         this.debug && console.log('🔧 Initalized messaging');
         this.messageChannel = new MessageChannel();
-        
         this.messageChannel.port1.onmessage = this.handleMessageFromServiceWorker.bind(this);
     }
 
     initalizeServiceWorker() {
         this.debug && console.log('🔧 Initalized service worker');
-        //@TODO: serviceWorker.controller is null. This causes an error on first load
-        // @TODO: I think this is fixed now.
-        console.log('////////BUG/////|||', navigator, navigator.serviceWorker);
         navigator.serviceWorker.controller.postMessage({
             type    : ACTIONS.INITIALIZE,
             payload : {
                 namespace          : this.namespace,
                 version            : this.version,
                 debug              : this.debug,
-                messageChannelPort : this.messageChannel.port2
+                messageChannelPort : this.messageChannel.port2,
             }
         }, [this.messageChannel.port2]);
     }
@@ -91,7 +87,6 @@ export default class Preloader {
         });
     }
 
-    // @TODO Better name for this method?
     handleMessageFromServiceWorker(event) {
         switch (event.data.type) {
             case ACTIONS.RESOURCE_PRELOADED:

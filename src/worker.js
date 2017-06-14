@@ -15,6 +15,19 @@ const CACHE = {
 
 let messageChannelPort;
 
+function handleMessage(action) {
+    switch (action.type) {
+        case 'INITIALIZE':
+            initialize(action.payload);
+            break;
+        case 'PRELOAD':
+            preloadAll(CACHE.name, action.payload);
+            break;
+        default:
+            break;
+    }
+}
+
 self.addEventListener('install', (event) => {
     event.waitUntil(
         self.skipWaiting().then(() => {
@@ -35,32 +48,18 @@ self.addEventListener('message', (event) => {
    event.waitUntil(handleMessage(event.data));
 });
 
-// @TODO: Temp code from Google docs.... switch out
 self.addEventListener('fetch', (event) => {
     event.respondWith(
         caches.match(event.request)
             .then((response) => {
-                if (response) {
-                    return response;
-                }
-                return fetch(event.request);
-            }
+               if (response) {
+                   return response;
+               }
+               return fetch(event.request);
+           }
         )
     );
 });
-
-function handleMessage(action) {
-    switch (action.type) {
-        case 'INITIALIZE':
-            initialize(action.payload);
-            break;
-        case 'PRELOAD':
-            preloadAll(CACHE.name, action.payload);
-            break;
-        default:
-            break;
-    }
-}
 
 function initialize(data) {
     CACHE.namespace = data.namespace;
@@ -69,8 +68,7 @@ function initialize(data) {
     debug = data.debug;
 
     return Promise.resolve()
-        // cleaning old cache keys
-        .then(() => caches.keys())
+        .then(() => caches.keys()) // cleaning old cache keys
         .then((keys) => Promise.all(keys.map(removeCache)))
         .then((keys) => {
             debug && console.log('Offline Service Worker', 'Cache cleaned', keys.filter(key => key), Date.now());
@@ -78,7 +76,6 @@ function initialize(data) {
     );
 }
 
-// @TODO need to build this out more
 function preload(cache, asset) {
     return cache.add(asset).then(() => {
         messageChannelPort.postMessage({
