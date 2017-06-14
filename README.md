@@ -49,22 +49,22 @@ Add component to your template:
     ]"
 ></vue-offline-preloader>
 ```
-_Note: In order to get your app to work offline you'll need to include "/" in the assets array shown above_
+_Note: In order to enable an offline experience you'll need to include "/" in the assets array (see above example)_
 
 ---
 
 ## Props
 
-| Prop             | Type                  | Default      | Required | Description  |
-| ---------------- |-----------------------| -------------|----------|--------------|
-| assets           | Array&lt;string&gt;   |              | required | Collection of asset files to be cached |
-| namespace        | string                | "vue"        | optional | Namespace for resource cache |
-| version          | string                | "v1"         | optional | Version of resource cache |
-| scope            | string                | "/"          | optional | Scope of the Sevice Worker's control |
-| worker           | string                | "/worker.js" | optional | Location of the Service Worker file. Defaults to app's public root |
-| showPreloaderBar | boolean               | true         | optional | Display progress bar |
-| backgroundColor  | string                | "#29d"       | optional | Background colour of progress bar |
-| debug            | boolean               | false        | optional | Flag to display console.log debugging messages from Service Worker |
+| Prop             | Type                  | Default      | Required     | Description  |
+| ---------------- |-----------------------| -------------|--------------|--------------|
+| assets           | Array&lt;string&gt;   |              | **required** | Collection of asset files to be cached |
+| namespace        | string                | "vue"        | optional     | Namespace for resource cache |
+| version          | string                | "v1"         | optional     | Version of resource cache |
+| scope            | string                | "/"          | optional     | Scope of the Sevice Worker's control |
+| worker           | string                | "/worker.js" | optional     | Location of the Service Worker file. Defaults to app's public root |
+| showPreloaderBar | boolean               | true         | optional     | Display progress bar |
+| backgroundColor  | string                | "#29d"       | optional     | Background colour of progress bar |
+| debug            | boolean               | false        | optional     | Flag to display console.log debugging messages from Service Worker |
 
 ## Events
 
@@ -79,7 +79,6 @@ _Note: In order to get your app to work offline you'll need to include "/" in th
 ## Basic Event Example
 
 ```javascript
-// main.js
 document.addEventListener('serviceWorker.preloading.asset', () => {
     console.log('asset loaded!');
 });
@@ -97,6 +96,10 @@ npm test -- --verbose
 
 ## Browser Support
 
-This package requires Service Worker support. Which currently includes Firefox 52+, Chrome 49+, Opera 45+, Chrome for Android 59+.
+This package requires Service Worker support which currently includes Firefox 52+, Chrome 49+, Opera 45+, Chrome for Android 59+.
 
 For an current list of browsers please see: [Can I Use](http://caniuse.com/#feat=serviceworkers)
+
+## Notes
+
+- This package will work though localhost, however once deployed you will need to have HTTPS as it is a requirement for Service Workers.
