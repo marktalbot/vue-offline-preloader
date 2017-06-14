@@ -1,26 +1,28 @@
 # Vue Offline Preloader
 
-@TODO: write a blurb about the package
+This is a Vue component that uses Service Workers to enable offline experiences and preloading of assets for better performance. 
 
-### Installation and Usage
+## Installation and Usage (macOS/Unix-like)
 
-##### Step 1: Installation
+#### Step 1: Install Package
+
+Install via npm:
 
 ```
 $ npm install vue-offline-preloader
 ```
 
-##### Step 2: Install Service Worker
+#### Step 2: Install Service Worker
 
-In your project's public public root, create a symbolic link to `worker.js` found in the package `src` folder:
+In your project's **public root**, create a symbolic link to `worker.js` found in the package `src` folder:
 
 ```bash
 ln -s ./node_modules/vue-offline-preloader/src/worker.js worker.js
 ```
 
+#### Step 3: Register the Component
 
-##### Step 3: Register the Component
-Register the component:
+Register the component with Vue:
 
 ```javascript
 
@@ -34,9 +36,9 @@ new Vue({
 });
 ```
 
-##### Step 4: Add Component to Template
+#### Step 4: Add Component to Template
 
-Add component to the top of your template:
+Add component to your template:
 
 ```html
 <vue-offline-preloader 
@@ -47,10 +49,11 @@ Add component to the top of your template:
     ]"
 ></vue-offline-preloader>
 ```
+_Note: In order to get your app to work offline you'll need to include "/" in the assets array shown above_
 
 ---
 
-### Props
+## Props
 
 | Prop             | Type                  | Default      | Required | Description  |
 | ---------------- |-----------------------| -------------|----------|--------------|
@@ -63,7 +66,7 @@ Add component to the top of your template:
 | backgroundColor  | string                | "#29d"       | optional | Background colour of progress bar |
 | debug            | boolean               | false        | optional | Flag to display console.log debugging messages from Service Worker |
 
-### Events
+## Events
 
 | Event                              | Description  |
 | -----------------------------------|--------------|
@@ -73,7 +76,7 @@ Add component to the top of your template:
 | serviceWorker.preloading.complete  | Asset preloading is complete  |
 
 
-### Event basic example
+## Basic Event Example
 
 ```javascript
 // main.js
@@ -81,8 +84,8 @@ document.addEventListener('serviceWorker.preloading.asset', () => {
     console.log('asset loaded!');
 });
 ```
-
-#### Tests
+<!-- 
+## Tests
 
 ```bash
 npm test
@@ -90,4 +93,10 @@ npm test
 
 ```bash
 npm test -- --verbose
-```
+``` -->
+
+## Browser Support
+
+This package requires Service Worker support. Which currently includes Firefox 52+, Chrome 49+, Opera 45+, Chrome for Android 59+.
+
+For an current list of browsers please see: [Can I Use](http://caniuse.com/#feat=serviceworkers)
