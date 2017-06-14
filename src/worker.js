@@ -14,22 +14,21 @@ const CACHE = {
 };
 
 let messageChannelPort;
-// let debug = false;
 
 self.addEventListener('install', (event) => {
     event.waitUntil(
         self.skipWaiting().then(() => {
-            // Perform install stuff (open caches, etc)
-            // caches.open(cacheName).then((cache) => {
-            //     console.log('Opened cache:', cacheName);
-            //     return cache.addAll(assets);
-            // })
-        }),
+            console.info('Service Worker Installed', Date.now());
+        })
     );
 });
 
 self.addEventListener('activate', (event) => {
-    // @TODO: Build this out more
+    event.waitUntil(
+        self.clients.claim().then(() => {
+            console.info('Service Worker Activated', Date.now());
+        })
+    );
 });
 
 self.addEventListener('message', (event) => {
@@ -45,8 +44,8 @@ self.addEventListener('fetch', (event) => {
                     return response;
                 }
                 return fetch(event.request);
-            },
-        ),
+            }
+        )
     );
 });
 
@@ -75,7 +74,7 @@ function initialize(data) {
         .then((keys) => Promise.all(keys.map(removeCache)))
         .then((keys) => {
             debug && console.log('Offline Service Worker', 'Cache cleaned', keys.filter(key => key), Date.now());
-        },
+        }
     );
 }
 
@@ -97,7 +96,7 @@ function removeCache(key) {
                 resolve(key);
             }
             resolve();
-        },
+        }
     );
 }
 
