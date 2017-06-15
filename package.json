@@ -11,7 +11,12 @@
     "url": "https://github.com/marktalbot/vue-offline-preloader"
   },
   "keywords": [
-    "spatie"
+    "vuejs",
+    "vue",
+    "vue-component",
+    "offline-first",
+    "service-worker",
+    "preloading"
   ],
   "bugs": {
     "url": "https://github.com/marktalbot/vue-offline-preloader/issues"
