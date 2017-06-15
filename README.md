@@ -83,16 +83,6 @@ document.addEventListener('serviceWorker.preloading.asset', () => {
     console.log('asset loaded!');
 });
 ```
-<!-- 
-## Tests
-
-```bash
-npm test
-```
-
-```bash
-npm test -- --verbose
-``` -->
 
 ## Browser Support
 
@@ -103,3 +93,7 @@ For an current list of browsers please see: [Can I Use](http://caniuse.com/#feat
 ## Notes
 
 - This package will work through `localhost`, however once deployed you will need to have HTTPS as it is a requirement for Service Workers.
+
+## Todo
+- [ ] Write tests
+- [ ] Add video caching support
