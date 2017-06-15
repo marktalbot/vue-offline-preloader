@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "@TODO"
+    "url": "https://github.com/marktalbot/vue-offline-preloader"
   },
   "bugs": {
     "url": "https://github.com/marktalbot/vue-offline-preloader/issues"
