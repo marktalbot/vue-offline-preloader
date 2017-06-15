@@ -2,7 +2,7 @@
 
 This is a Vue component that uses Service Workers to enable offline experiences and preloading/caching of assets for improved performance. 
 
-## Installation and Usage (macOS/Unix-like)
+## Installation and Usage (macOS/Linux/Unix-like)
 
 #### Step 1: Install Package
 
