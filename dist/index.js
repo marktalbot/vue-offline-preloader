@@ -114,9 +114,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 
@@ -504,8 +501,6 @@ module.exports = function normalizeComponent (
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "temp"
-  }, [_c('div', {
     staticClass: "preloader-progress-bar",
     class: {
       hidden: !_vm.showPreloaderBar, complete: _vm.loadingComplete
@@ -521,7 +516,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     style: ({
       color: _vm.backgroundColor
     })
-  })])]), _vm._v(" "), _c('pre', [_vm._v(_vm._s(_vm.$data))])])
+  })])])
 },staticRenderFns: []}
 
 /***/ }),

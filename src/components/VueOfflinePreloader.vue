@@ -1,11 +1,8 @@
 <template>
-    <div class="temp">
-        <div class="preloader-progress-bar" :class="{ hidden: !showPreloaderBar, complete: loadingComplete }">
-            <div class="bar" :style="{ width: percentLoaded + '%', backgroundColor: backgroundColor }">
-                <div class="peg" :style="{ color: backgroundColor }"></div>
-            </div>
+    <div class="preloader-progress-bar" :class="{ hidden: !showPreloaderBar, complete: loadingComplete }">
+        <div class="bar" :style="{ width: percentLoaded + '%', backgroundColor: backgroundColor }">
+            <div class="peg" :style="{ color: backgroundColor }"></div>
         </div>
-        <pre>{{ $data }}</pre>
     </div>
 </template>
 
