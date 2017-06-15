@@ -1,6 +1,6 @@
 {
   "name": "vue-offline-preloader",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "This is a Vue component that uses Service Workers to enable offline experiences and preloading/caching of assets for improved performance",
   "main": "dist/index.js",
   "scripts": {
