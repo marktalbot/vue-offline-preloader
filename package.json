@@ -4,7 +4,9 @@
   "description": "This is a Vue component that uses Service Workers to enable offline experiences and preloading/caching of assets for improved performance",
   "main": "dist/index.js",
   "scripts": {
-    "build": "rm -rf dist && NODE_ENV=production webpack"
+    "build": "npm run build:webpack && npm run build:es5",
+    "build:webpack": "rm -rf dist && NODE_ENV=production webpack",
+    "build:es5": "babel dist/index.js -o dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -28,8 +30,10 @@
   "author": "Mark Talbot <markjtalbot@gmail.com> (https://marktalbot.ca)",
   "license": "MIT",
   "devDependencies": {
+    "babel-cli": "^6.24.1",
     "babel-loader": "^7.0.0",
     "babel-preset-es2015": "^6.24.1",
+    "babel-preset-latest": "^6.24.1",
     "babel-register": "^6.24.1",
     "browser-env": "^2.0.31",
     "css-loader": "^0.28.4",
@@ -42,5 +46,8 @@
     "vue-node": "^1.1.1",
     "vue-template-compiler": "^2.3.3",
     "webpack": "^2.6.1"
+  },
+  "babel": {
+    "presets": ["latest"]
   }
 }
