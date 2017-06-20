@@ -1,8 +1,8 @@
 const ACTIONS = {
-    INITIALIZE           : 'INITIALIZE',
-    PRELOAD              : 'PRELOAD',
-    PRELOADING_COMPLETED : 'PRELOADING_COMPLETED',
-    RESOURCE_PRELOADED   : 'RESOURCE_PRELOADED',
+    INITIALIZE: 'INITIALIZE',
+    PRELOAD: 'PRELOAD',
+    PRELOADING_COMPLETED: 'PRELOADING_COMPLETED',
+    RESOURCE_PRELOADED: 'RESOURCE_PRELOADED',
 };
 
 export default class Preloader {
@@ -69,12 +69,12 @@ export default class Preloader {
     initalizeServiceWorker() {
         this.debug && console.log('🔧 Initalized service worker');
         navigator.serviceWorker.controller.postMessage({
-            type    : ACTIONS.INITIALIZE,
-            payload : {
-                namespace          : this.namespace,
-                version            : this.version,
-                debug              : this.debug,
-                messageChannelPort : this.messageChannel.port2,
+            type: ACTIONS.INITIALIZE,
+            payload: {
+                namespace: this.namespace,
+                version: this.version,
+                debug: this.debug,
+                messageChannelPort: this.messageChannel.port2,
             }
         }, [this.messageChannel.port2]);
     }
@@ -82,8 +82,8 @@ export default class Preloader {
     preloadAssets() {
         this.debug && console.log('🚚 Preloading assets...');
         navigator.serviceWorker.controller.postMessage({
-            type    : ACTIONS.PRELOAD,
-            payload : this.assets,
+            type: ACTIONS.PRELOAD,
+            payload: this.assets,
         });
     }
 
@@ -92,7 +92,7 @@ export default class Preloader {
             case ACTIONS.RESOURCE_PRELOADED:
                 this.debug && console.log('📦', event.data.payload.asset);
                 this.emit('serviceWorker.preloading.asset', {
-                    detail: { percentageLoaded : this.percentageLoaded }
+                    detail: { percentageLoaded: this.percentageLoaded }
                 });
                 break;
             case ACTIONS.PRELOADING_COMPLETED:

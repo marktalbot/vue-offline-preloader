@@ -1,13 +1,13 @@
 const ACTIONS = {
-    INITIALIZE           : 'INITIALIZE',
-    PRELOAD              : 'PRELOAD',
-    PRELOADING_COMPLETED : 'PRELOADING_COMPLETED',
-    RESOURCE_PRELOADED   : 'RESOURCE_PRELOADED',
+    INITIALIZE: 'INITIALIZE',
+    PRELOAD: 'PRELOAD',
+    PRELOADING_COMPLETED: 'PRELOADING_COMPLETED',
+    RESOURCE_PRELOADED: 'RESOURCE_PRELOADED',
 };
 
 const CACHE = {
-    namespace : undefined,
-    version   : undefined,
+    namespace: undefined,
+    version: undefined,
     get name() {
         return `${this.namespace}-${this.version}`;
     },
@@ -79,8 +79,8 @@ function initialize(data) {
 function preload(cache, asset) {
     return cache.add(asset).then(() => {
         messageChannelPort.postMessage({
-            type    : ACTIONS.RESOURCE_PRELOADED,
-            payload : { asset },
+            type: ACTIONS.RESOURCE_PRELOADED,
+            payload: { asset },
         });
     });
 }
@@ -103,8 +103,8 @@ function preloadAll(cacheName, data) {
         .then((cache) => Promise.all(data.map((asset) => preload(cache, asset))))
         .then(() => {
             messageChannelPort.postMessage({
-                type    : ACTIONS.PRELOADING_COMPLETED,
-                payload : {},
+                type: ACTIONS.PRELOADING_COMPLETED,
+                payload: {},
             });
         },
     );

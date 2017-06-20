@@ -75,7 +75,7 @@
 
 <style>
     .preloader-progress-bar {
-        pointer-events: none; /* Make clicks pass-through */
+        pointer-events: none;
         opacity: 1.0;
         transition: all 2500ms ease;
     }
